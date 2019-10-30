@@ -27,13 +27,13 @@ app.post("/", function (req, res) {
 
     console.log(firstName + " " + secondName + " " + email);
     var options = {
-        url:"https://us3.api.mailchimp.com/3.0/lists/"+list_id,
+        url:"https://us3.api.mailchimp.com/3.0/lists/"+process.env.list_id,
         method:"POST",
         headers:{
             "Authorization":"naveen "+process.env.api_key,
         },
         body:jsonData
-    }
+    };
     request(options, function (error, response, body) {
         if(error){
             res.send("There was an error in signing up");
@@ -46,9 +46,10 @@ app.post("/", function (req, res) {
         }
 
     })
+
+    })
     app.post("/failure",function(req,res){
         res.redirect("/");
-    })
 
 });
 app.listen(process.env.PORT || 3000, function () {
